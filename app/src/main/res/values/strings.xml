@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SPS</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAvWP_6A5WsCRHnpmb_0S2pFy-jZf_0ark</string>
+    <string name="title_activity_main">Map</string>
 </resources>

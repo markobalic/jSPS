@@ -4,17 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/logo"
     tools:context=".WelcomeActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Screen"
-        android:textSize="40sp"
-        android:layout_centerInParent="true"
-        android:textColor="#ffffff"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="222dp" />
 </RelativeLayout>
