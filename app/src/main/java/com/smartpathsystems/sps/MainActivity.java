@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private static int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +36,37 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+
             @Override
             public void onMapLongClick(LatLng latLng) {
-                mMap.addMarker(new MarkerOptions().position(latLng));
-            }
+                //static int counter = 0;
+
+                if(counter < 2) {
+                    mMap.addMarker(new MarkerOptions().position(latLng));
+                    Toast.makeText(MainActivity.this, "Marker created", Toast.LENGTH_SHORT).show();
+                    counter++;
+                }
+                else
+                    Toast.makeText(MainActivity.this, "Both markers already created", Toast.LENGTH_SHORT).show();
+                }
         });
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
+            /*@Override
             public boolean onMarkerClick(Marker marker) {
                 Toast.makeText(MainActivity.this, "Ne upiri pinpoint", Toast.LENGTH_SHORT).show();
+                Marker
+                return true;*/
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                marker.remove();
+                Toast.makeText(MainActivity.this, "Marker removed", Toast.LENGTH_SHORT).show();
+                counter--;
                 return true;
             }
         });
+        /*mMap.setOnMarkerDragListener({
+
+        });*/
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //Ako lokacije nisu dopustene, salje se prompt window sa pitanjem da se dopuste
