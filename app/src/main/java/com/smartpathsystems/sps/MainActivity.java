@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private static int counter = 0;
+    private Marker marker1;
+    private Marker marker2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //static int counter = 0;
 
                 if(counter < 2) {
-                    mMap.addMarker(new MarkerOptions().position(latLng));
+
+                    if(counter == 0)
+                        marker1 = mMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    else
+                        marker2 = mMap.addMarker(new MarkerOptions().position(latLng));
+
                     Toast.makeText(MainActivity.this, "Marker created", Toast.LENGTH_SHORT).show();
                     counter++;
                 }
@@ -57,10 +65,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Marker
                 return true;*/
             @Override
+            //nakon uklanjanja drugog, sljedeci dodan ce biti zelen!
             public boolean onMarkerClick(Marker marker) {
                 marker.remove();
+                if(marker2.isVisible() == true)
+                    counter = 0;
+                else
+                    counter = 1;
                 Toast.makeText(MainActivity.this, "Marker removed", Toast.LENGTH_SHORT).show();
-                counter--;
+                //counter--;
                 return true;
             }
         });
